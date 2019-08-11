@@ -1,3 +1,16 @@
+/* The project contains two-dimensional graphics realized by each of the following sections 
+	1. Graphic text
+	2. Sketching different shapes
+	3. Filling shapes
+	4. Moving
+	5. Screen borders
+	6. Rounds
+	7. Animation
+	8. Work with a keyboard
+	9. Working with a mouse
+	10. Text throughout the game (counter)
+*/
+
 #include <graphics.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -13,12 +26,14 @@ union REGS i, o;
 int button,x,y;
 void print_briks();
 int briks[20]={0},bally=200,BallMaxYFlag=0,ballx=50;
+// getmaxx(),getmaxy() : getting the screen size
 int cx = getmaxx()/2,r = 10,maxx=getmaxx(),StartGame = 0,InstructionF = 0,endGameF = 0,GameOverFlag = 0;
 int  main()
 {
 int gdriver = DETECT, gmode, errorcode;
-initgraph(&gdriver, &gmode, "");
-errorcode = graphresult();
+initgraph(&gdriver, &gmode, ""); //initgraph() - entering entering graphic mode
+errorcode = graphresult(); /*graphresult () checks whether we have successfully switched to graphical mode. If not, we print an error message
+			    and finish the program.*/ 
 int status, gd = DETECT, gm;
 	 initgraph(&gd,&gm,"C:\\TC\\BGI");
 	 getmousepos(&button,&x,&y);
@@ -47,6 +62,7 @@ int midx,midy,k;
 		   settextstyle(SCRIPT_FONT, HORIZ_DIR, 5);
 		   outtextxy(midx,midy,"Loading...");
 		   settextstyle(SCRIPT_FONT, HORIZ_DIR, 5);
+		   //outtextxy receiving the text to display on the screen in a specific place
 		   outtextxy(midx+5,midy+30,"Please Wait.. ");
 		   setcolor(3);
 		   circle(midx,midy,k);
@@ -61,6 +77,7 @@ int midx,midy,k;
 	  settextstyle(SMALL_FONT, HORIZ_DIR,5);
 	  outtextxy(0,0,"< We Are PRESENTING To YOUOOOOOOOOOOOOOOOOOOOOO The Brick Breaker >");
 	  
+	  //rectangle(left, top, right, bottom ) An order that receives rectangle borders, and draws an empty rectangle
 	  rectangle(100,30,170,70);
 	  outtextxy(120,40,"START");
 	  
@@ -268,7 +285,8 @@ int midx,midy,k;
 	
 	
 getch();
-closegraph();
+/*At the end of the work in graphical mode we need to call the closegraph () function to return to text mode.*/
+closegraph(); 
 return 0;
 }
 
